@@ -170,7 +170,7 @@ if any(os.path.isfile(x) for x in config_locations):
     if "database-options" in config:
         DATABASES["default"]["OPTIONS"] = config["database-options"]
 
-   if "ldap" in config:
+    if "ldap" in config:
         ldap = config["ldap"]
         LDAP_SERVER = ldap.get("server", "")
         LDAP_SEARCH_BASE = ldap.get("search_base", "")
