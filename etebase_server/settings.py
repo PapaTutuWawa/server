@@ -180,6 +180,11 @@ if any(os.path.isfile(x) for x in config_locations):
         LDAP_BIND_PW_FILE = ldap.get("bind_pw_file", "")
         LDAP_CACHE_TTL = ldap.get("cache_ttl", "")
 
+        if not LDAP_BIND_DN:
+            raise Exception("LDAP enabled but bind_dn is not set!")
+        if not LDAP_BIND_PW and not LDAP_BIND_PW_FILE:
+            raise Exception("LDAP enabled but both bind_pw and bind_pw_file are not set!")
+
         # Configure EteBase to use LDAP
         ETEBASE_CREATE_USER_FUNC = "etebase_server.myauth.ldap.create_user"
         ETEBASE_API_PERMISSIONS_READ = ["etebase_server.myauth.ldap.is_user_in_ldap"]
